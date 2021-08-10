@@ -13,3 +13,11 @@ bwa index ref.fa
 cd ~
 java -jar picard.jar CreateSequenceDictionary R=/lustre/work/jmanthey/zosterops_genome/ref.fa O=/lustre/work/jmanthey/zosterops_genome/ref.dict
 
+# make directories for organization during genotyping
+mkdir 00_fastq
+mkdir 01_cleaned
+mkdir 01_mtDNA
+mkdir 01_bam_files
+mkdir 02_vcf
+mkdir 03_vcf
+mkdir 10_align_script
