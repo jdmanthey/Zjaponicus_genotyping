@@ -24,8 +24,3 @@ ${workdir}/04_vcf/${region_array}.vcf
 vcftools --vcf ${workdir}/04_vcf/${region_array}.vcf --keep ingroup.txt \
 --max-missing 1.0 --mac 2 --max-alleles 2 --max-maf 0.49 --recode \
 --recode-INFO-all --out ${workdir}/05_pca/structure_${region_array}
-
-# filter for phylogenetic network (includes outgroup)
-vcftools --vcf ${workdir}/04_vcf/${region_array}.vcf \
---max-missing 1.0 --mac 2 --max-alleles 2 --max-maf 0.49 --recode \
---recode-INFO-all --out ${workdir}/05_pca/phydist_${region_array}
