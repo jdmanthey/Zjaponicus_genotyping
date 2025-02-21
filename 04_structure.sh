@@ -1,3 +1,6 @@
+
+# interactive job
+
 interactive -p nocona -c 4 -m 8G
 
 source activate bcftools
@@ -5,6 +8,23 @@ source activate bcftools
 workdir=/lustre/scratch/jmanthey/02_zj
 
 cd ${workdir}/05_pca
+
+
+##########################################
+##########################################
+### remove contigs that are probably Z 
+##########################################
+##########################################
+rm structure_JABUOJ010000001.1.recode.vcf
+rm structure_JABUOJ010000003.1.recode.vcf
+rm structure_JABUOJ010000007.1.recode.vcf
+rm structure_JABUOJ010000015.1.recode.vcf
+rm structure_JABUOJ010000018.1.recode.vcf
+rm structure_JABUOJ010000028.1.recode.vcf
+rm structure_JABUOJ010000041.1.recode.vcf
+rm structure_JABUOJ010000062.1.recode.vcf
+rm structure_JABUOJ010000073.1.recode.vcf
+rm structure_JABUOJ010000075.1.recode.vcf
 
 
 ##########################################
@@ -17,9 +37,6 @@ grep "^#" structure_JABUOJ010000351.1.recode.vcf > structure.vcf
 
 for i in $( ls structure_*.recode.vcf ); do grep -v "^#" $i >> structure.vcf; done
 
-grep "^#" phydist_JABUOJ010000351.1.recode.vcf > phydist.vcf
-
-for i in $( ls phydist_*.recode.vcf ); do grep -v "^#" $i >> phydist.vcf; done
 
 ##########################################
 ##########################################
@@ -29,7 +46,6 @@ for i in $( ls phydist_*.recode.vcf ); do grep -v "^#" $i >> phydist.vcf; done
 
 rm structure_*.recode.vcf
 
-rm phydist_*.recode.vcf
 
 ##########################################
 ##########################################
@@ -38,8 +54,6 @@ rm phydist_*.recode.vcf
 ##########################################
 
 vcftools --vcf structure.vcf --max-missing 1.0 --thin 5000 --recode --recode-INFO-all --out structure
-
-vcftools --vcf phydist.vcf --max-missing 1.0 --thin 5000 --recode --recode-INFO-all --out phydist
 
 ##########################################
 ##########################################
@@ -67,3 +81,12 @@ plink --file structure --recode12 --allow-extra-chr --out admixture_plink
 
 # run admixture
 for K in 1 2 3 4 5; do admixture --cv admixture_plink.ped $K  | tee log_${K}.out; done
+
+
+
+
+
+
+
+
+
